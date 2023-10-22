@@ -1,0 +1,14 @@
+from flask import Flask , render_template #importando a classe Flask e a função render_template do pacote Flask
+
+app = Flask (__name__)
+
+@app.route("/") #Definindo rota
+def homepage(): #Quando um usuário acessar a URL raiz do site, executará a função homepage()
+    return "<h1>Essa é minha pagina inicial</h1>" #Isso será exibido no navegador quando a URL raiz for acessada
+
+@app.route('/contato') #Definindo rota
+def contato(): #Quando um usuário acessar a URL .../contato, executará a função contato()
+    return render_template('contato.html') #A função contato renderiza um modelo chamado 'contato.html' usando a função render_template.
+
+
+app.run(debug=True)
