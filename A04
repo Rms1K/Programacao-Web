@@ -1,0 +1,21 @@
+import sqlite3: Importa o módulo sqlite3, que fornece uma API para interagir com o SQLite
+
+DATABASE = 'user.db': Define o nome do arquivo do banco de dados como 'user.db'
+
+conn = sqlite3.connect(DATABASE): Cria uma conexão com o banco de dados SQLite
+
+cursor = conn.cursor(): Cria um objeto de cursor associado à conexão. O cursor vai ser usado para executar comandos SQL no banco de dados.
+
+cursor.execute('CREATE TABLE IF NOT EXISTS Usuarios (id INTEGER PRIMARY KEY, nome TEXT, idade INTEGER)'): Executa um comando SQL para criar uma tabela chamada 'Usuarios' se ela ainda não existir. A tabela possui três colunas: 'id' (chave primária e tipo INTEGER), 'nome' (tipo TEXT), e 'idade' (tipo INTEGER).
+
+cursor.execute('INSERT INTO Usuarios (nome,idade) VALUES (?,?)',('jhon',26)): Executa um comando SQL para inserir uma linha na tabela Usuarios.
+
+cursor.execute('INSERT INTO Usuarios (nome,idade) VALUES (?,?)',('Matheus',32)): Insere outra linha na tabela Usuarios
+
+conn.commit(): Confirma as alterações no banco de dados
+
+cursor.execute('SELECT * FROM Usuarios'): Executa uma consulta SQL para selecionar tudo da tabela Usuarios
+
+for row in cursor.fetchall(): print(row): Itera sobre todas as linhas retornadas pela consulta e imprime cada linha
+
+conn.close(): Fecha a conexão com o banco de dados
