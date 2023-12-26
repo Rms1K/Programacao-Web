@@ -1,0 +1,79 @@
+#Importa o módulo flet
+import flet as ft
+
+#Função para validar campos obrigatórios no formulário
+def validate_required_text_field(e):
+    if e.control.value == "":
+       e.control.error_text = "Preenchimento obrigatório"
+       e.control.update()
+
+#Função para criar um formulário usando o flet.
+def create_form(pg):
+    return ft.SafeArea(
+        ft.Column(
+            scroll=ft.ScrollMode.AUTO,
+            controls=[
+
+                #Cria campos de texto
+                ft.TextField (
+                    label="Nome",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField (
+                    label="CNPJ",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField (
+                    label="Especialidades",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField (
+                    label="Email",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField (
+                    label="Telefone",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField (
+                    label="Endereco",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),       
+            ]   
+        ),
+    )
+
+#Função principal configura o título da página, 
+#modo de rolagem e adiciona elementos à página, 
+#como textos, formulário e um botão de cadastro.
+def main(page: ft.Page):
+
+    
+    page.title = "AraClin: Catálogo de Clínicas Médicas"
+    page.scroll = "adaptive"
+
+    
+    page.add(
+        ft.Text("AraClin", size=30, color="green"),
+        ft.Text("Cadastro de Clínica", size=20),
+        create_form(main),
+    )
+
+    
+    def btn_click(e):
+        page.add(ft.Text("Clínica cadastrada com sucesso!", color="green"))
+
+    
+    page.add(
+        ft.ElevatedButton("Cadastrar", on_click=btn_click),
+    )
+
+#Inicia a aplicação flet 
+if __name__ == "__main__":
+    ft.app(target=main, view=ft.WEB_BROWSER)
